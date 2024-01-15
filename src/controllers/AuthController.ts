@@ -9,7 +9,9 @@ import { getUserByUsername, isPasswordCorrect, changePassword } from "../state/u
 class AuthController {
     static login = async (req: Request, res: Response, next: NextFunction) => {
         let { username, password } = req.body;
-        if(!(username & password)) throw new ClientError(`Username and password are required`)
+        if(!(username && password)) {
+             throw new ClientError(`Username and password are required`) 
+        }
 
         const user = getUserByUsername(username);
 
